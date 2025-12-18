@@ -73,4 +73,15 @@ public class AggregatorRestClient {
         return Arrays.stream(body)
                 .collect(Collectors.toList());
     }
+    public List<Entry> getWordsEndingWith(String chars) {
+
+        String uri = "http://localhost:9091/getWordsEndingWith/" + chars;
+
+        ResponseEntity<Entry[]> result = restTemplate.getForEntity(uri, Entry[].class);
+        Entry[] body = result.getBody();
+
+        return Arrays.stream(body)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -36,32 +36,16 @@ public class AggregatorController {
         return aggregatorService.getDefinitionFor(word);
     }
 
-    @GetMapping("/getWordsThatContainSuccessiveLettersAndStarsWith/{chars}")
-    public List<Entry> getWordsThatContainSuccessiveLettersAndStartsWith(@PathVariable String chars) {
+    @GetMapping("/getAllPalindromes")
+    public List<Entry> getAllPalindromes() { return aggregatorService.getAllPalindromes();
+    }
 
+    @GetMapping("/getWordsThatContainSuccessiveLettersAndStartsWith/{chars}")
+    public List<Entry> getWordsThatContainSuccessiveLettersAndStartsWith(@PathVariable String chars) {
         return aggregatorService.getWordsThatContainSuccessiveLettersAndStartsWith(chars);
     }
 
     @GetMapping("/getWordsThatContain/{chars}")
-    public List<Entry> getWordsThatContain(String chars) {
-
-        StopWatch sw = new StopWatch();
-        sw.start();
-        List<Entry> entries = aggregatorService.getWordsThatContain(chars);
-        sw.stop();
-
-        long nanoSeconds = sw.getTotalTimeNanos();
-        String message = new StringBuilder().append("Retrieved entries for words containing [")
-                                            .append(chars)
-                                            .append("], ")
-                                            .append(" containing ")
-                                            .append(entries.size())
-                                            .append(" entries in ")
-                                            .append(nanoSeconds / 1000000.0)
-                                            .append("ms")
-                                            .toString();
-        log.info(message);
-
-        return entries;
+    public List<Entry> getWordsThatContain(@PathVariable String chars) {return aggregatorService.getWordsThatContain(chars);
     }
 }
